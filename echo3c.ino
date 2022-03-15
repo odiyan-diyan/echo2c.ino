@@ -24,9 +24,31 @@ void setup()
 void loop()
 {
   unsigned char cs1;
+  unsigned char change;
+  unsigned char c_change;
+ 
   while (U0kbhit()==0){}; // wait for RDA = true
   cs1 = U0getchar();    // read character
-  U0putchar(cs1);     // echo character
+ 
+  int test1 = (cs1 / 16);
+  int test2 = (cs1 % 16);
+ 
+ if(test1 > 9){
+  change = (test1 + ('A' - 10));
+ }
+ else{
+  change = (test1 + '0');
+ }
+ 
+  if(test2 > 9){
+  change = (test2 + ('A' - 10));
+ }
+ else{
+  change = (test2 + '0');
+ }
+  U0putchar(cs1);  // echo character
+  U0putchar(change);
+  U0putchat(c_change, '\n');
 }
 //
 // function to initialize USART0 to "int" Baud, 8 data bits,
